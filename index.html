@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Felipe Urbina-Parada — Physicist and complex systems researcher at Universidad Mayor, Santiago, Chile.">
+<meta property="og:title" content="Felipe Urbina-Parada">
+<meta property="og:description" content="PhD in Complex Systems. Research on cellular automata, magnetic interactions, and agent-based models.">
+<meta property="og:type" content="website">
+<title>Felipe Urbina-Parada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg:      #0c0e0d;
+    --bg2:     #131614;
+    --bg3:     #191d19;
+    --border:  rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --accent:  #76e29a;
+    --accent2: #4dca75;
+    --text:    #e6ece7;
+    --muted:   #8a9c8e;
+    --dim:     #475249;
+    --serif:   'DM Serif Display', Georgia, serif;
+    --sans:    'DM Sans', system-ui, sans-serif;
+    --mono:    'DM Mono', 'Courier New', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(12,14,13,0.93);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 54px;
+  }
+  .nav-logo {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--accent); letter-spacing: 0.06em; font-weight: 500;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 12px; letter-spacing: 0.05em;
+    transition: color 0.18s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--muted); font-size: 20px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 7rem 2.5rem 4.5rem;
+    max-width: 860px; margin: 0 auto;
+  }
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--accent); letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .eyebrow::before {
+    content: ''; display: block;
+    width: 22px; height: 0.5px; background: var(--accent);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    font-weight: 400; line-height: 1.1;
+    letter-spacing: -0.02em; color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-bio {
+    font-size: 15px; color: var(--muted);
+    max-width: 540px; line-height: 1.85;
+    margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.09em; border-radius: 2px;
+    padding: 9px 22px; cursor: pointer;
+    text-decoration: none; transition: all 0.18s;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--accent); color: #0c0e0d; border: none; }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-ghost {
+    background: transparent; color: var(--muted);
+    border: 0.5px solid var(--border2);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--dim); }
+
+  /* ── STATS ── */
+  .stat-bar {
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    margin: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-item {
+    text-align: center; padding: 2rem 1rem;
+    border-right: 0.5px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-family: var(--serif); font-size: 2.2rem;
+    font-weight: 400; color: var(--accent); line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .stat-label {
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 4.5rem 2.5rem; max-width: 860px; margin: 0 auto; }
+  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
+  .tag {
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); border: 0.5px solid rgba(118,226,154,0.35);
+    padding: 2px 7px; border-radius: 2px;
+  }
+  h2 {
+    font-family: var(--serif); font-size: 1.9rem;
+    font-weight: 400; color: var(--text); letter-spacing: -0.01em;
+  }
+
+  /* ── RESEARCH CARDS ── */
+  .research-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px; background: var(--border);
+    border: 0.5px solid var(--border);
+  }
+  .research-card {
+    background: var(--bg2); padding: 1.75rem;
+    transition: background 0.18s;
+  }
+  .research-card:hover { background: var(--bg3); }
+  .r-icon {
+    font-family: var(--mono); font-size: 20px;
+    color: var(--accent); margin-bottom: 1rem; opacity: 0.75;
+  }
+  .r-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 0.5rem; line-height: 1.4; }
+  .r-desc { font-size: 12px; color: var(--muted); line-height: 1.65; }
+
+  /* ── PUBLICATIONS ── */
+  .pub-list { display: flex; flex-direction: column; }
+  .pub-item {
+    border-bottom: 0.5px solid var(--border);
+    padding: 1.4rem 0;
+    display: grid; grid-template-columns: 46px 1fr 20px;
+    gap: 1.1rem; align-items: start;
+    cursor: pointer; transition: opacity 0.18s;
+    text-decoration: none; color: inherit;
+  }
+  .pub-item:first-child { border-top: 0.5px solid var(--border); }
+  .pub-item:hover { opacity: 0.65; }
+  .pub-year {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--dim); padding-top: 3px;
+  }
+  .pub-title { font-size: 13.5px; color: var(--text); line-height: 1.55; margin-bottom: 0.3rem; }
+  .pub-journal { font-size: 11.5px; color: var(--muted); font-style: italic; }
+  .pub-arrow { font-size: 14px; color: var(--dim); padding-top: 3px; }
+  .pub-badge {
+    display: inline-block;
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(118,226,154,0.08);
+    color: var(--accent); border: 0.5px solid rgba(118,226,154,0.2);
+    padding: 1px 6px; border-radius: 2px; margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ── IOT ── */
+  .iot-wrap {
+    background: var(--bg2);
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    padding: 3.5rem 2.5rem;
+  }
+  .iot-inner {
+    max-width: 860px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
+  }
+  .iot-label {
+    font-family: var(--mono); font-size: 9px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.9rem; opacity: 0.75;
+  }
+  .iot-title {
+    font-family: var(--serif); font-size: 1.7rem;
+    font-weight: 400; color: var(--text);
+    margin-bottom: 1rem; line-height: 1.25;
+  }
+  .iot-desc { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .iot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .iot-chip {
+    background: var(--bg3); border: 0.5px solid var(--border);
+    aspect-ratio: 1; border-radius: 4px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
+  }
+  .iot-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .iot-chip:nth-child(2) .iot-dot { opacity: 0.7; }
+  .iot-chip:nth-child(3) .iot-dot { opacity: 0.4; }
+  .iot-chip:nth-child(4) .iot-dot { opacity: 0.9; }
+  .iot-chip:nth-child(5) .iot-dot { opacity: 1; }
+  .iot-chip:nth-child(6) .iot-dot { opacity: 0.55; }
+  .iot-chip-lbl { font-family: var(--mono); font-size: 7.5px; color: var(--dim); letter-spacing: 0.04em; }
+
+  /* ── CONTACT ── */
+  .contact-wrap {
+    padding: 3.5rem 2.5rem;
+    max-width: 860px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+  }
+  .contact-wrap h2 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+  .contact-wrap p { font-size: 13px; color: var(--muted); }
+  .contact-links { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+  .c-link {
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: 0.06em; color: var(--muted);
+    border: 0.5px solid var(--border2); padding: 7px 15px;
+    border-radius: 2px; text-decoration: none;
+    transition: all 0.18s;
+  }
+  .c-link:hover { color: var(--accent); border-color: rgba(118,226,154,0.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border);
+    padding: 1.4rem 2.5rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-left { font-family: var(--mono); font-size: 10.5px; color: var(--dim); }
+  .footer-right { display: flex; gap: 1.5rem; }
+  .footer-right a { font-family: var(--mono); font-size: 10.5px; color: var(--dim); text-decoration: none; transition: color 0.18s; }
+  .footer-right a:hover { color: var(--muted); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 54px; left: 0; right: 0; background: var(--bg2); border-bottom: 0.5px solid var(--border); padding: 1.25rem; gap: 1rem; }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: block; }
+    .hero { padding: 4rem 1.25rem 3rem; }
+    .stat-bar { grid-template-columns: repeat(2,1fr); }
+    .stat-item { border-right: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+    .stat-item:nth-child(2n) { border-right: none; }
+    section { padding: 3rem 1.25rem; }
+    .iot-inner { grid-template-columns: 1fr; }
+    .contact-wrap { padding: 2.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
+    footer { padding: 1.25rem; }
+    .pub-item { grid-template-columns: 38px 1fr 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">felipe.urbina</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#iot">IoT</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="eyebrow">Physicist · Complex Systems · Universidad Mayor</div>
+  <h1>Studying order<br>from <em>chaos</em></h1>
+  <p class="hero-bio">
+    Ph.D. in Complex Systems (Universidad Adolfo Ibáñez). I research out-of-equilibrium dynamics, phase transitions, and self-organization using numerical simulation, statistical mechanics, and graph theory. Currently Associate Professor at Centro Multidisciplinario de Física, Universidad Mayor, Santiago.
+  </p>
+  <div class="hero-actions">
+    <a href="#publications" class="btn btn-primary">View publications →</a>
+    <a href="https://scholar.google.com/citations?user=daCEZ28AAAAJ&hl=en" target="_blank" rel="noopener" class="btn btn-ghost">Google Scholar ↗</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-number">31</div>
+    <div class="stat-label">Publications</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">134</div>
+    <div class="stat-label">Citations</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">10+</div>
+    <div class="stat-label">Years active</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">SCL</div>
+    <div class="stat-label">Santiago, Chile</div>
+  </div>
+</div>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="section-header">
+    <span class="tag">Focus areas</span>
+    <h2>Research</h2>
+  </div>
+  <div class="research-grid">
+    <div class="research-card">
+      <div class="r-icon">⊞</div>
+      <div class="r-title">Cellular Automata</div>
+      <div class="r-desc">Q2R-Potts models, phase transitions, equilibrium and non-equilibrium dynamics in conservative and reversible systems.</div>
+    </div>
+    <div class="research-card">
+      <div class="r-icon">⊛</div>
+      <div class="r-title">Magnetic Systems</div>
+      <div class="r-desc">Frequency dynamics of magnetized rotor chains, Landau–Lifshitz equations, dipolar interactions and instability.</div>
+    </div>
+    <div class="research-card">
+      <div class="r-icon">◈</div>
+      <div class="r-title">Agent-Based Models</div>
+      <div class="r-desc">Civil disorder, epidemic spread, language emergence, and vocabulary formation via multi-agent simulation.</div>
+    </div>
+    <div class="research-card">
+      <div class="r-icon">⌗</div>
+      <div class="r-title">Complex Networks</div>
+      <div class="r-desc">Graph-based language models, financial interaction networks, cultural heritage metadata and community detection.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-header">
+    <span class="tag">Selected works</span>
+    <h2>Publications</h2>
+  </div>
+  <div class="pub-list">
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/400702451" target="_blank" rel="noopener">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Growth of clusters and scale-free distribution at the phase transition point of the two-dimensional Q2R-Potts model <span class="pub-badge">New</span></div>
+        <div class="pub-journal">Physical Review E</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/401528898" target="_blank" rel="noopener">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Mapping semantic bias in UNESCO intangible heritage metadata through community detection in South America</div>
+        <div class="pub-journal">npj Heritage Science</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/400252736" target="_blank" rel="noopener">
+      <div class="pub-year">2026</div>
+      <div>
+        <div class="pub-title">Permutation entropy and statistical complexity in graph-based representations across world languages</div>
+        <div class="pub-journal">EPL (Europhysics Letters)</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/391893750" target="_blank" rel="noopener">
+      <div class="pub-year">2025</div>
+      <div>
+        <div class="pub-title">Stock Market Bubble Warning: A Restricted Boltzmann Machine Approach Using Volatility–Return Sequences</div>
+        <div class="pub-journal">Applied Sciences</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/380728838" target="_blank" rel="noopener">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-title">Order-disorder on cluster dynamics in the Q2R-Potts cellular automaton</div>
+        <div class="pub-journal">Journal of Statistical Mechanics: Theory and Experiment</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/374397702" target="_blank" rel="noopener">
+      <div class="pub-year">2023</div>
+      <div>
+        <div class="pub-title">Sequential epidemic-like spread between agglomerates of self-propelled agents in one dimension</div>
+        <div class="pub-journal">Physical Review E</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/364156217" target="_blank" rel="noopener">
+      <div class="pub-year">2022</div>
+      <div>
+        <div class="pub-title">Frequency dynamics of a chain of magnetized rotors: dumbbell model vs Landau–Lifshitz equation</div>
+        <div class="pub-journal">Journal of Physics: Condensed Matter</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/360415440" target="_blank" rel="noopener">
+      <div class="pub-year">2022</div>
+      <div>
+        <div class="pub-title">Phase diagram in a one-dimensional civil disorder model</div>
+        <div class="pub-journal">Physical Review E</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/351286631" target="_blank" rel="noopener">
+      <div class="pub-year">2021</div>
+      <div>
+        <div class="pub-title">Stable and unstable trajectories in a dipolar chain</div>
+        <div class="pub-journal">Physical Review B</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/349341656" target="_blank" rel="noopener">
+      <div class="pub-year">2021</div>
+      <div>
+        <div class="pub-title">Formation of vocabularies in a decentralized graph-based approach to human language</div>
+        <div class="pub-journal">Physical Review E</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/338475250" target="_blank" rel="noopener">
+      <div class="pub-year">2020</div>
+      <div>
+        <div class="pub-title">Equilibrium and nonequilibrium in the three-dimensional Q2R cellular automata</div>
+        <div class="pub-journal">Physical Review E</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+    <a class="pub-item" href="https://www.researchgate.net/publication/306186720" target="_blank" rel="noopener">
+      <div class="pub-year">2016</div>
+      <div>
+        <div class="pub-title">Master Equation approach to Reversible and Conservative Discrete Systems</div>
+        <div class="pub-journal">Physical Review E</div>
+      </div>
+      <div class="pub-arrow">↗</div>
+    </a>
+
+  </div>
+  <div style="margin-top:1.5rem;">
+    <a href="https://www.researchgate.net/profile/Felipe-Parada-2" target="_blank" rel="noopener" class="btn btn-ghost">All 31 publications on ResearchGate ↗</a>
+  </div>
+</section>
+
+<!-- IOT -->
+<div class="iot-wrap" id="iot">
+  <div class="iot-inner">
+    <div>
+      <div class="iot-label">Side projects</div>
+      <div class="iot-title">Low-cost IoT devices</div>
+      <p class="iot-desc">
+        I design and build custom Internet of Things hardware using microcontrollers and 3D-printed enclosures. From hardware design to firmware — bridging the gap between physics research and hands-on making.
+      </p>
+    </div>
+    <div class="iot-grid">
+      <div class="iot-chip"><div class="iot-dot"></div><div class="iot-chip-lbl">ESP32</div></div>
+      <div class="iot-chip"><div class="iot-dot"></div><div class="iot-chip-lbl">Sensor</div></div>
+      <div class="iot-chip"><div class="iot-dot"></div><div class="iot-chip-lbl">3D print</div></div>
+      <div class="iot-chip"><div class="iot-dot"></div><div class="iot-chip-lbl">WiFi</div></div>
+      <div class="iot-chip"><div class="iot-dot"></div><div class="iot-chip-lbl">Arduino</div></div>
+      <div class="iot-chip"><div class="iot-dot"></div><div class="iot-chip-lbl">MQTT</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+  <div>
+    <h2>Get in touch</h2>
+    <p>Open to collaboration, questions, and conversations.</p>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:furbinaparada@gmail.com" class="c-link">Email</a>
+    <a href="https://scholar.google.com/citations?user=daCEZ28AAAAJ&hl=en" target="_blank" rel="noopener" class="c-link">Google Scholar</a>
+    <a href="https://www.researchgate.net/profile/Felipe-Parada-2" target="_blank" rel="noopener" class="c-link">ResearchGate</a>
+    <a href="https://www.linkedin.com/in/felipe-andr%C3%A9s-urbina-parada-269449145/" target="_blank" rel="noopener" class="c-link">LinkedIn</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">© 2026 Felipe Urbina-Parada · Universidad Mayor, Santiago</div>
+  <div class="footer-right">
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const links  = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+</script>
+</body>
+</html>
